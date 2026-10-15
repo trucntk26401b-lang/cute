@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#dff4ff">
+<title>Kiểm chứng AI — Khảo sát sinh viên</title>
+<style>
+:root{
+  --sky:#dff4ff; --blue:#9bdcff; --cream:#fffaf0; --yellow:#ffe27a;
+  --yellow2:#ffc94d; --ink:#29425a; --muted:#64788a; --lav:#e9e3ff;
+  --pink:#ffdce8; --white:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font-family:ui-rounded,"Trebuchet MS",system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(circle at 8% 15%,#fff 0 3px,transparent 4px),
+    radial-gradient(circle at 90% 30%,#fff8 0 4px,transparent 5px),
+    linear-gradient(145deg,#dff4ff 0%,#f6f0ff 52%,#fff7d9 100%);
+  overflow-x:hidden;
+}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none}
+body:before{width:260px;height:260px;background:#fff8;top:-90px;right:-60px}
+body:after{width:220px;height:220px;background:#ffedaa66;bottom:-90px;left:-60px}
+.wrap{width:min(1100px,92%);margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.2px}
+.brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:15px;background:#fff;box-shadow:0 6px 0 #c4e5f5;font-size:23px}
+.pill{font-size:.82rem;background:#ffffffb8;border:1px solid #fff;padding:9px 13px;border-radius:999px;color:#53718b}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:28px;padding:36px 0 58px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;background:#ffffffc9;padding:9px 14px;border-radius:999px;font-size:.88rem;font-weight:800;box-shadow:0 5px 18px #7ab4d51c}
+h1{font-size:clamp(2.4rem,5.8vw,4.65rem);line-height:1.02;letter-spacing:-2px;margin:20px 0 18px}
+h1 .highlight{color:#2488bd;text-shadow:0 3px 0 #fff}
+.lead{font-size:1.08rem;line-height:1.75;color:#536b80;max-width:590px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{border:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 21px;border-radius:17px;font-weight:900;font-size:1rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-4px)}
+.primary{color:#674900;background:linear-gradient(180deg,#ffe88f,#ffd04e);box-shadow:0 7px 0 #e5ad34,0 14px 26px #d5a53630}
+.secondary{background:#ffffffc9;color:#46657c;box-shadow:0 6px 0 #cce8f6}
+.note{font-size:.84rem;color:#73869a;margin-top:18px}
+.art{min-height:380px;position:relative;display:grid;place-items:center}
+.orbit{position:absolute;width:min(360px,80vw);aspect-ratio:1;border:2px dashed #fff; border-radius:50%;animation:spin 28s linear infinite}
+.orbit:before,.orbit:after{content:"✦";position:absolute;color:#fff;font-size:27px;text-shadow:0 2px 12px #8dcbe7}
+.orbit:before{top:12%;left:8%}.orbit:after{bottom:10%;right:7%;font-size:20px}
+.cheese{width:245px;height:225px;position:relative;z-index:1;filter:drop-shadow(0 20px 12px #7aaac544);animation:bob 3.4s ease-in-out infinite}
+.cheese-body{position:absolute;inset:20px 10px 12px;background:linear-gradient(145deg,#fff09b 0%,#ffd84f 62%,#ffbd35 100%);border:5px solid #fff9d8;border-radius:44% 42% 37% 38%;transform:rotate(-7deg);box-shadow:inset -13px -12px 0 #f4b93866,inset 10px 9px 0 #fff9c8}
+.hole{position:absolute;border-radius:50%;background:#eeb52e;box-shadow:inset 3px 3px 0 #d99b28aa}
+.h1{width:29px;height:25px;top:56px;left:54px}.h2{width:19px;height:18px;top:112px;left:35px}.h3{width:25px;height:22px;top:143px;right:45px}.h4{width:14px;height:14px;top:42px;right:47px}
+.eye{position:absolute;width:10px;height:14px;background:#654b38;border-radius:50%;top:95px;z-index:2}.eye.left{left:91px}.eye.right{right:84px}
+.blush{position:absolute;width:24px;height:13px;background:#ff9ca7aa;border-radius:50%;top:116px;z-index:2}.blush.left{left:64px}.blush.right{right:58px}
+.smile{position:absolute;left:50%;top:111px;width:20px;height:12px;border-bottom:4px solid #654b38;border-radius:0 0 50% 50%;transform:translateX(-50%);z-index:2}
+.arm{position:absolute;top:123px;width:35px;height:10px;background:#ffcf4a;border:3px solid #fff0b0;border-radius:99px;z-index:0}.arm.left{left:-6px;transform:rotate(28deg)}.arm.right{right:-6px;transform:rotate(-30deg)}
+.foot{position:absolute;bottom:2px;width:16px;height:27px;background:#f8b83b;border:3px solid #fff0b0;border-radius:99px;z-index:-1}.foot.left{left:83px}.foot.right{right:76px}
+.float{position:absolute;display:grid;place-items:center;background:#ffffffd9;border:1px solid #fff;border-radius:18px;box-shadow:0 10px 24px #7eb9d52b;animation:bob 4s ease-in-out infinite}
+.float.one{top:50px;left:8%;padding:13px;font-size:25px}.float.two{right:4%;top:95px;padding:12px 15px;font-size:22px;animation-delay:-1s}.float.three{bottom:35px;left:13%;padding:12px 16px;font-weight:900;animation-delay:-2s}.float.four{bottom:50px;right:9%;padding:12px;font-size:22px;animation-delay:-.6s}
+.section{padding:18px 0 55px}
+.section-head{text-align:center;max-width:650px;margin:0 auto 24px}
+.section-head h2{font-size:clamp(1.7rem,4vw,2.5rem);margin:0 0 10px;letter-spacing:-.7px}
+.section-head p{color:var(--muted);line-height:1.65;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#ffffffb8;border:1px solid #fff;border-radius:24px;padding:23px;box-shadow:0 12px 35px #78a9c51c;transition:transform .2s}
+.card:hover{transform:translateY(-5px)}
+.card-icon{width:48px;height:48px;display:grid;place-items:center;background:#fff;border-radius:16px;font-size:24px;margin-bottom:14px}
+.card h3{margin:0 0 8px;font-size:1.08rem}.card p{margin:0;color:#65798b;line-height:1.6;font-size:.95rem}
+.form-section{padding:25px 0 70px;scroll-margin-top:20px}
+.form-shell{background:#ffffffd9;border:2px solid #fff;border-radius:30px;padding:clamp(15px,3vw,30px);box-shadow:0 18px 55px #6798b51f}
+.form-title{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:18px}
+.form-title h2{margin:0;font-size:clamp(1.45rem,3.5vw,2rem)}
+.form-title p{margin:6px 0 0;color:var(--muted);line-height:1.5}
+iframe{display:block;width:100%;height:1050px;border:0;border-radius:18px;background:#fff}
+footer{text-align:center;padding:0 0 28px;color:#6f8295;font-size:.85rem}
+.spark{position:fixed;pointer-events:none;color:#fff;z-index:-1;animation:twinkle 3s ease-in-out infinite}
+.s1{top:20%;left:3%;font-size:20px}.s2{top:70%;right:3%;font-size:25px;animation-delay:1s}.s3{top:45%;right:1%;font-size:15px;animation-delay:2s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(2deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+@media(max-width:760px){
+ nav{padding:15px 0}.pill{font-size:.73rem}
+ .hero{grid-template-columns:1fr;padding:22px 0 35px;gap:8px}
+ h1{letter-spacing:-1.2px}.art{min-height:320px;grid-row:1}
+ .cheese{transform:scale(.86)}.orbit{width:280px}
+ .float.one{left:6%;top:28px}.float.two{right:4%;top:55px}.float.three{bottom:22px;left:5%}.float.four{bottom:25px;right:5%}
+ .cards{grid-template-columns:1fr}.card{padding:19px;display:grid;grid-template-columns:50px 1fr;column-gap:13px}.card-icon{grid-row:span 2;margin:0}
+ .card h3{align-self:end}.card p{align-self:start}
+ iframe{height:1200px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span>
+<div class="wrap">
+  <nav>
+    <div class="brand"><span class="brand-mark">🧀</span><span>Study Lab <span style="color:#2488bd">Survey</span></span></div>
+    <span class="pill">Khảo sát dành cho sinh viên</span>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="intro">
+        <span class="eyebrow">✦ Cùng học tập thông minh hơn</span>
+        <h1>AI trả lời,<br><span class="highlight">bạn kiểm chứng!</span></h1>
+        <p class="lead">Khi dùng AI để học tập, bạn có thường kiểm tra lại thông tin không? Hãy chia sẻ thói quen của bạn để góp phần tìm hiểu các yếu tố liên quan đến hành vi kiểm chứng thông tin AI của sinh viên năm nhất.</p>
+        <div class="actions">
+          <a class="btn primary" href="#khao-sat">Bắt đầu khảo sát <span aria-hidden="true">↗</span></a>
+          <a class="btn secondary" href="#gioi-thieu">Tìm hiểu thêm ↓</a>
+        </div>
+        <p class="note">Thời gian trả lời tùy theo tốc độ của bạn · Vui lòng chọn câu trả lời phù hợp nhất.</p>
+      </div>
+
+      <div class="art" aria-label="Nhân vật phô mai hoạt hình">
+        <div class="orbit"></div>
+        <div class="float one">✦</div><div class="float two">💡</div>
+        <div class="float three">Think · Check · Learn</div><div class="float four">⭐</div>
+        <div class="cheese">
+          <div class="arm left"></div><div class="arm right"></div>
+          <div class="cheese-body">
+            <span class="hole h1"></span><span class="hole h2"></span><span class="hole h3"></span><span class="hole h4"></span>
+          </div>
+          <span class="eye left"></span><span class="eye right"></span>
+          <span class="blush left"></span><span class="blush right"></span><span class="smile"></span>
+          <span class="foot left"></span><span class="foot right"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gioi-thieu">
+      <div class="section-head">
+        <h2>Mỗi câu trả lời đều có ý nghĩa</h2>
+        <p>Khảo sát tập trung vào cách sinh viên sử dụng AI và kiểm tra độ tin cậy của thông tin trong học tập.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="card-icon">🔎</div><h3>Kiểm chứng thông tin</h3><p>Tìm hiểu cách bạn đối chiếu câu trả lời AI với nguồn tin, giáo trình và tài liệu học tập.</p></article>
+        <article class="card"><div class="card-icon">🧠</div><h3>Thói quen sử dụng AI</h3><p>Chia sẻ mức độ sử dụng AI và tần suất bạn kiểm tra lại thông tin trong 30 ngày qua.</p></article>
+        <article class="card"><div class="card-icon">💬</div><h3>Ý kiến của bạn</h3><p>Không có câu trả lời đúng hay sai tuyệt đối. Hãy trả lời theo trải nghiệm thực tế của mình.</p></article>
+      </div>
+    </section>
+
+    <section class="form-section" id="khao-sat">
+      <div class="form-shell">
+        <div class="form-title">
+          <div><h2>📝 Bảng câu hỏi khảo sát</h2><p>Điền trực tiếp bên dưới — câu trả lời được gửi qua Google Forms.</p></div>
+          <span class="pill">Google Forms</span>
+        </div>
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdFFUB4Uts8v2XDzPUoCVKZKX1Y_aoo98J2UGCQsTKBtlS7nA/viewform?embedded=true"
+          title="Bảng khảo sát về hành vi kiểm chứng thông tin do AI cung cấp trong học tập"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">Đang tải biểu mẫu…</iframe>
+        <p class="note">Nếu biểu mẫu không hiển thị trong khung, <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFFUB4Uts8v2XDzPUoCVKZKX1Y_aoo98J2UGCQsTKBtlS7nA/viewform" target="_blank" rel="noopener noreferrer" style="color:#2488bd;font-weight:800">mở khảo sát trong Google Forms</a>.</p>
+      </div>
+    </section>
+  </main>
+  <footer>Được thiết kế cho dự án khảo sát học tập · Cảm ơn bạn đã dành thời gian tham gia.</footer>
+</div>
+</body>
+</html>
